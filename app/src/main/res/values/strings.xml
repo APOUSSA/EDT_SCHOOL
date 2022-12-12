@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">EDT SCHOOL</string>
+    <string name="col1">JOURS</string>
+    <string name="col2">LUNDI</string>
+    <string name="col3">MARDI</string>
+    <string name="col4">MERCREDI</string>
+    <string name="col5">JEUDI</string>
+    <string name="col6">VENDREDI</string>
+    <string name="col7">SAMEDI</string>
+    <string name="row1Name">07h30-09h30</string>
+    <string name="row2Name">09h30-11h30</string>
+    <string name="row3Name">11h30-12h45</string>
+    <string name="row3Name1">PAUSE</string>
+    <string name="row4Name">12h45-14h45</string>
+    <string name="row5Name">14h45-16h45</string>
+<!--    <string name="row1Age">29</string>-->
+<!--    <string name="row1Surname">Clinton</string>-->
+</resources>

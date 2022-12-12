@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001931205108",
+    "project_id": "edt-school",
+    "storage_bucket": "edt-school.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001931205108:android:ba30d6afbd1143f4ca31a1",
+        "android_client_info": {
+          "package_name": "com.example.edtschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001931205108-0ob1h9eu3sspirrnsasqquei3ntu036f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP4VhaqqP8FwDtWrEMsfQgh6DoAfp_DD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001931205108-0ob1h9eu3sspirrnsasqquei3ntu036f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
