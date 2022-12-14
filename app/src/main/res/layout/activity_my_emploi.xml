@@ -49,7 +49,7 @@
                 android:layout_height="80dp"
                 android:layout_below="@+id/title_bar_layout"
                 android:layout_margin="10dp"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:background="@color/whiteD">
 
                 <EditText
@@ -66,15 +66,13 @@
                 <EditText
                     android:id="@+id/emploi_classe_text"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Classe"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:layout_alignParentEnd="true"
-                    android:padding="8dp"
+                    android:layout_height="50dp"
                     android:layout_margin="20dp"
-                   />
+                    android:hint="Classe"
+                    android:padding="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -598,7 +596,37 @@
                 </TableRow>
 
             </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/title_emploi"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                android:background="@color/whiteD">
+
+                <TextView
+                    android:id="@+id/delete_emploi_text_view_btn"
+                    android:text="Supprimer Emploi du temps"
+                    android:gravity="center"
+                    android:layout_width="400dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:padding="8dp"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_alignParentEnd="true"
+                    />
+
+            </LinearLayout>
+
+
         </LinearLayout>
+
+
     </ScrollView>
 
 

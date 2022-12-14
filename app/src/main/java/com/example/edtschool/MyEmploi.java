@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,11 @@ import com.google.firebase.firestore.DocumentReference;
 public class MyEmploi extends AppCompatActivity {
 
     EditText titleEditText, classeEditText;
-    TableLayout contentTaleLayout;
+    TableLayout contentTableLayout;
+    TextView pageTitleTextView, deleteEmploiTextViewBtn;
+    String title,classe,content,docId;
     ImageView saveEmploiBtn;
+    boolean isEditMode = false;
     String[] cour = {"Developpement mobile","CCNA1", "CCNA2", "Cryptographie" ,"Analyse","Redaction scientique","Electonique numerique","POO","Developpement Web","GNU Linus","Les Bases de données","Anglais","Algorithmique","Maths Discètes"};
 
     AutoCompleteTextView autoCompleteTextView;
@@ -38,11 +42,35 @@ public class MyEmploi extends AppCompatActivity {
         setContentView(R.layout.activity_my_emploi);
 
         titleEditText = findViewById(R.id.emploi_title_text);
-        contentTaleLayout = findViewById(R.id.emploi_content_text);
+        contentTableLayout = findViewById(R.id.emploi_content_text);
         saveEmploiBtn = findViewById(R.id.save_emploi_btn);
         classeEditText = findViewById(R.id.emploi_classe_text);
+        pageTitleTextView = findViewById(R.id.page_title);
+        deleteEmploiTextViewBtn = findViewById(R.id.delete_emploi_text_view_btn);
+
+        //RECEVOIR LES DONNEES
+        title = getIntent().getStringExtra("title");
+        classe = getIntent().getStringExtra("classe");
+        content = getIntent().getStringExtra("content");
+        docId = getIntent().getStringExtra("docId");
+
+        if(docId!=null && !docId.isEmpty()){
+            isEditMode = true;
+        }
+
+        titleEditText.setText(title);
+        classeEditText.setText(classe);
+        //contentTableLayout.setLayoutParams(contentTableLayout);
+
+        if(isEditMode){
+            pageTitleTextView.setText("Modifie ton Emploi de temps");
+            deleteEmploiTextViewBtn.setVisibility(View.VISIBLE);
+        }
+
 
         saveEmploiBtn.setOnClickListener((v)-> saveEmploi());
+
+        deleteEmploiTextViewBtn.setOnClickListener((v)->deleteEmploiFromFirebase());
 
         autoCompleteTextView = findViewById(R.id.autocomplete);
 
@@ -386,7 +414,7 @@ public class MyEmploi extends AppCompatActivity {
     void saveEmploi(){
         String emploiTitle = titleEditText.getText().toString();
         String emploiClasse = classeEditText.getText().toString();
-        String emploiContent = contentTaleLayout.getLayoutParams().toString();
+        String emploiContent = contentTableLayout.getLayoutParams().toString();
         if(emploiTitle==null || emploiTitle.isEmpty()){
             titleEditText.setError("Le titre est requis");
             return;
@@ -408,7 +436,14 @@ public class MyEmploi extends AppCompatActivity {
 
     void saveEmploiToFirebase(Emploi emploi){
         DocumentReference documentReference;
-        documentReference = Utility.getCollectionReferenceForEmplois().document();
+        if(isEditMode){
+            //METTRE A JOUR LA NOTE
+            documentReference = Utility.getCollectionReferenceForEmplois().document(docId);
+        }else{
+            //CREER UN NOUVELLE EMPLOIS DE TEMPS
+            documentReference = Utility.getCollectionReferenceForEmplois().document();
+        }
+
 
         documentReference.set(emploi).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -422,6 +457,24 @@ public class MyEmploi extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    void deleteEmploiFromFirebase(){
+        DocumentReference documentReference;
+            documentReference = Utility.getCollectionReferenceForEmplois().document(docId);
+            documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task){
+                if(task.isSuccessful()){
+                    //ajouter l'emploi du temps
+                    Utility.showToast(MyEmploi.this, "Emploi du temps supprimer avec succes");
+                    finish();
+                }else {
+                    Utility.showToast(MyEmploi.this, "Echec lors de la suppression de l'emploi du temps");
+                }
+            }
+        });
+
     }
 
 }
